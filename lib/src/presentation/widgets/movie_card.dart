@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trialing_api/src/data/movie_model.dart';
 import "package:flutter/src/widgets/image.dart" as Image;
@@ -30,21 +28,19 @@ class MovieCard extends StatelessWidget {
         height: 180,
         width: 150,
         child: Padding(
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           child: Stack(
               children: [
-                Container(
-                    child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Image.Image.network(showImage, fit: BoxFit.cover)
-                              ),
-                            ),
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: SizedBox(
+                        height: double.infinity,
+                        width: double.infinity,
+                        child: Image.Image.network(showImage, fit: BoxFit.cover)
                           ),
                         ),
+                      ),
                 Positioned.fill(
                     child: Align(
                       alignment: Alignment.bottomCenter,
@@ -65,7 +61,7 @@ class MovieCard extends StatelessWidget {
                             ],
                            ),
                           child: Padding(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                                  child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -82,7 +78,7 @@ class MovieCard extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
-                                        Text(summary,style: TextStyle( color: Colors.white, fontSize:12),overflow: TextOverflow.ellipsis,maxLines: 2,)
+                                        Text(summary,style: const TextStyle( color: Colors.white, fontSize:12),overflow: TextOverflow.ellipsis,maxLines: 2,)
                                       ],
                                     ),
                                   ),

@@ -57,7 +57,7 @@ class _DetailPageState extends State<DetailPage> {
             Stack(
                 children: [
                   Image.Image.network(widget.movie2.image.original, fit: BoxFit.cover, height: 300, width: double.infinity, alignment: Alignment.topCenter,),
-                  Positioned(right: 10, top: 15,child: Chip(label: Text(widget.movie2.genre[0]), backgroundColor: Colors.white24,),) ,]),
+                  Positioned(right: 10, top: 15,child: Row(children: [Chip(label: Text(widget.movie2.genre[0]), backgroundColor: Colors.white24,),Chip(label: Text(widget.movie2.genre[1]), backgroundColor: Colors.white24,),],)) ,]),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: FutureBuilder<List<CastModel>?>(

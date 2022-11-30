@@ -15,7 +15,7 @@ class CastScroller extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 40,
-              backgroundImage: NetworkImage(actor.person.image.medium),
+              backgroundImage: NetworkImage(actor.person.image.medium ?? ''),
               ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),

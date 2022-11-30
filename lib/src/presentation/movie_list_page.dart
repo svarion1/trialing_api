@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:trialing_api/src/presentation/movie_card.dart';
-
+import 'package:trialing_api/src/presentation/widgets/movie_card.dart';
+import "package:trialing_api/src/data/movie_model.dart" as Image;
 import '../data/movie_model.dart';
 import 'detail_page.dart';
 
@@ -71,7 +71,7 @@ class _MovieListPageState extends State<MovieListPage> {
                           summary: snapshot.data![index].summary.toString(),
                           id: snapshot.data![index].id,
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(movie2: snapshot.data![index])));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(movie2: snapshot.data!.isNotEmpty ? snapshot.data![index] : MovieModel(id: 2, name: "name", genre: [], image: Image.Image(medium: "medium", original: "original"), url: "url", summary: "summary", year: "year", rating: "rating"),)));
                           },
                         );
                       }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
