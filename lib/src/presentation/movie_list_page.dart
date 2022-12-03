@@ -8,9 +8,10 @@ import 'detail_page.dart';
 
 
 class MovieListPage extends StatefulWidget {
-  const MovieListPage({Key? key, required this.title}) : super(key: key);
+  const MovieListPage({Key? key, required this.title, required this.username}) : super(key: key);
 
   final String title;
+  final String username;
 
   @override
   State<MovieListPage> createState() => _MovieListPageState();
@@ -49,39 +50,48 @@ class _MovieListPageState extends State<MovieListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        title: Text(widget.title),
-
-
-    ),
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            "Welcome ${widget.username}",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
       body: FutureBuilder<List<MovieModel>>(
               future: futureMovies,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        return MovieCard(
-                          title: snapshot.data![index].name.toString(),
-                          showImage: snapshot.data![index].image.medium,
-                          summary: snapshot.data![index].summary.toString(),
-                          id: snapshot.data![index].id,
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(movie2: snapshot.data!.isNotEmpty ? snapshot.data![index] : MovieModel(id: 2, name: "name", genre: [], image: Image.Image(medium: "medium", original: "original"), url: "url", summary: "summary", year: "year", rating: "rating"),)));
-                          },
+                  return
+                      Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return MovieCard(
+                            title: snapshot.data![index].name.toString(),
+                            showImage: snapshot.data![index].image.medium,
+                            summary: snapshot.data![index].summary.toString(),
+                            id: snapshot.data![index].id,
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(id: snapshot.data![index].id)));
+                            },
+                          );
+                        }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 0.7,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 10,
+                                     ),
+                          ) ,
                         );
-                      }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: 0.7,
-                                        crossAxisSpacing: 10,
-                                        mainAxisSpacing: 10,
-                                   ),
-                        ) ,
-                      );
+
+
                 } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }

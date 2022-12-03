@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trialing_api/src/presentation/movie_list_page.dart';
+import 'package:trialing_api/src/presentation/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MovieListPage(title: 'Omedia'),
+      home: const WelcomePage(),
     );
   }
 }
