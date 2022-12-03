@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:trialing_api/src/data/cast_model.dart';
 import "package:flutter/src/widgets/image.dart" as Image;
 
@@ -19,7 +20,7 @@ class CastScroller extends StatelessWidget {
               ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Text(actor.person.name),
+              child: Text(actor.person.name, style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.italic),),
             )
           ],
         ),
@@ -31,11 +32,11 @@ class CastScroller extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             "Cast",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: GoogleFonts.raleway(fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ),
         SizedBox.fromSize(

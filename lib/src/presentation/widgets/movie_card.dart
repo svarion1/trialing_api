@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trialing_api/src/data/movie_model.dart';
 import "package:flutter/src/widgets/image.dart" as Image;
+import 'package:google_fonts/google_fonts.dart';
 
 class MovieCard extends StatelessWidget {
 
-  final String showImage, title, summary;
+  final String showImage, title, summary, rating;
   final int id;
   List<String> genres = [];
-  final onTap;
+  final VoidCallback onTap;
 
   MovieCard(
       {Key? key,
@@ -16,6 +17,7 @@ class MovieCard extends StatelessWidget {
         required this.id,
         required this.summary,
         required this.onTap,
+        required this.rating,
       })
       : super(key: key);
 
@@ -72,19 +74,39 @@ class MovieCard extends StatelessWidget {
                                              Expanded(
                                                child: Wrap(
                                                   children: [
-                                                        Text(title,style: const TextStyle(color: Colors.white,fontSize: 32,)),
+                                                        Text(title,style: GoogleFonts.raleway(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white), overflow: TextOverflow.ellipsis, maxLines: 2,),
                                                       ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                        Text(summary,style: const TextStyle( color: Colors.white, fontSize:12),overflow: TextOverflow.ellipsis,maxLines: 2,)
+                                        Text(summary,style: GoogleFonts.raleway(fontSize: 14, color: Colors.white), overflow: TextOverflow.ellipsis, maxLines: 3,),
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
                             ),
+                Positioned(
+                  top: 0,
+                  right: 5,
+
+                  child: Chip(
+                    backgroundColor: Colors.black.withOpacity(0.3),
+                    label: Wrap(
+                      spacing: 2,
+                      children: [Text(
+                        rating,
+                        style: GoogleFonts.raleway(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                        ),
+
+                      ),
+                        const Icon(Icons.star, color: Colors.yellow, size:16)]
+                    ),
+                  ),
+                ),
                           ],
                         ),
                       ),

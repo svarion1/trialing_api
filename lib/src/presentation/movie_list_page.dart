@@ -78,6 +78,7 @@ class _MovieListPageState extends State<MovieListPage> {
                             showImage: snapshot.data![index].image.medium,
                             summary: snapshot.data![index].summary.toString(),
                             id: snapshot.data![index].id,
+                            rating: snapshot.data![index].rating,
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(id: snapshot.data![index].id)));
                             },

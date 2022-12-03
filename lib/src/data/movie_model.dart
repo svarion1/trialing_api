@@ -8,7 +8,6 @@ class MovieModel {
   Image image;
   String url;
   String year;
-
   String summary;
   String rating;
 

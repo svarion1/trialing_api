@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-import "package:flutter/src/widgets/image.dart" as Image;
 import 'package:trialing_api/src/data/movie_model.dart';
+import "package:flutter/src/widgets/image.dart" as Image;
 import 'package:trialing_api/src/presentation/detail_page/cast_scroller.dart';
 import '../data/cast_model.dart';
-import '../data/movie_response.dart';
 
 class DetailPage extends StatefulWidget {
 
@@ -104,7 +104,7 @@ class _DetailPageState extends State<DetailPage> {
 
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text(summary.body!.text, style: const TextStyle(fontSize: 16),),
+                      child: Text(summary.body!.text, style: GoogleFonts.raleway(fontSize: 18, fontWeight: FontWeight.w400),),
 
                     ),
                     const Spacer(),
