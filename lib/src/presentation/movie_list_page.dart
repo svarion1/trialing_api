@@ -65,13 +65,16 @@ class _MovieListPageState extends State<MovieListPage> {
                       scrollDirection: Axis.vertical,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
+                        var test = snapshot.data![index];
+
                         return MovieCard(
                           title: snapshot.data![index].name.toString(),
                           showImage: snapshot.data![index].image.medium,
                           summary: snapshot.data![index].summary.toString(),
                           id: snapshot.data![index].id,
+                          rating: snapshot.data![index].rating,
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(movie2: snapshot.data!.isNotEmpty ? snapshot.data![index] : MovieModel(id: 2, name: "name", genre: [], image: Image.Image(medium: "medium", original: "original"), url: "url", summary: "summary", year: "year", rating: "rating"),)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(movie2: test,)));
                           },
                         );
                       }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

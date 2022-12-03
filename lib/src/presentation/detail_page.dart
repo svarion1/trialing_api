@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:trialing_api/src/data/movie_model.dart';
 import "package:flutter/src/widgets/image.dart" as Image;
@@ -47,17 +48,36 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    var genres = widget.movie2.genre;
+
     return
       Scaffold(
         appBar: AppBar(
-          title: Text(widget.movie2.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+          title: Text(widget.movie2.name, style: GoogleFonts.raleway(
+              textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  ))),
         ),
         body: Column(
           children: [
             Stack(
                 children: [
                   Image.Image.network(widget.movie2.image.original, fit: BoxFit.cover, height: 300, width: double.infinity, alignment: Alignment.topCenter,),
-                  Positioned(right: 10, top: 15,child: Row(children: [Chip(label: Text(widget.movie2.genre[0]), backgroundColor: Colors.white24,),Chip(label: Text(widget.movie2.genre[1]), backgroundColor: Colors.white24,),],)) ,]),
+                  Positioned(right: 10, top: 15,child: Row(children: [
+                    genres.length < 2 ? Chip(label: Text(genres[0])) : Row(
+                      children: [
+                        Chip(label: Text(genres[0])),
+                        const SizedBox(width: 5,),
+                        Chip(label: Text(genres[1])),
+                        ],
+                      ),
+                    ],
+                  )
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: FutureBuilder<List<CastModel>?>(
@@ -65,7 +85,7 @@ class _DetailPageState extends State<DetailPage> {
                 builder: (context, snapshot){
                   if(snapshot.hasData){
                     return CastScroller(actorList: snapshot.data!);
-                  }else{
+                  } else {
                     return const CircularProgressIndicator();
                   }
                 },
@@ -76,7 +96,7 @@ class _DetailPageState extends State<DetailPage> {
 
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(widget.movie2.summary, style: const TextStyle(fontSize: 18), overflow: TextOverflow.ellipsis, maxLines: 15,),
+              child: Text(widget.movie2.summary, style: GoogleFonts.raleway(fontSize: 18, fontWeight: FontWeight.w400),),
             ),
             const Spacer(),
           ],
