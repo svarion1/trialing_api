@@ -91,9 +91,15 @@ class _DetailPageState extends State<DetailPage> {
                         Stack(
                           children: [
                             Image.Image.network(snapshot.data!.image.original.toString(), fit: BoxFit.cover, height: 300, width: double.infinity, alignment: Alignment.topCenter,),
-                            Positioned(right: 10, top: 15,child: Row(children: [Chip(label: Text(snapshot.data!.genre[0]), backgroundColor: Colors.white24,),SizedBox(width: 5,),Chip(label: Text(snapshot.data!.genre[1]), backgroundColor: Colors.white24,),],)
+                            Positioned(right: 10, top: 15,child: Row(
+                              children: [
+                                Chip(label: Text(snapshot.data!.genre[0], style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400),), backgroundColor: Colors.white24,),
+                                const SizedBox(width: 5,),
+                                Chip(label: Text(snapshot.data!.genre.length > 1 ? snapshot.data!.genre[1] : "test", style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400),), backgroundColor: Colors.white24,),
+                              ],
+                            )
                             ) ,
-                            Positioned(left: 10, top: 15,child: Chip(label: Text(snapshot.data!.status), backgroundColor: snapshot.data!.status=="Ended"? Colors.red : Colors.lightGreenAccent,),) ,
+                            Positioned(left: 10, top: 15,child: Chip(label: Text(snapshot.data!.status, style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400),), backgroundColor: snapshot.data!.status=="Ended"? Colors.red : Colors.lightGreenAccent,),) ,
                           ],
                         ),
                         Padding(
