@@ -61,9 +61,6 @@ class _FavouriteButtonState extends State<FavouriteButton> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return IconButton(
       icon: Icon(
        _isFav==1 ? Icons.favorite : Icons.favorite_border,
@@ -75,10 +72,7 @@ class _FavouriteButtonState extends State<FavouriteButton> {
             _isFavourite = !_isFavourite;
           });
           insertMovie(Favourite(id: widget.id, isFavourite: _isFavourite ? 1 : 0));
-
       },
-
     );
   }
-
 }

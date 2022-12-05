@@ -38,11 +38,7 @@ class MovieModel {
             : 'N/A',
         status: json['status'],
         summary: parse(json['summary']).documentElement!.text);
-
-
   }
-
-
 }
 
 class Image {

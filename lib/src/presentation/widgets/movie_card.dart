@@ -87,12 +87,10 @@ class MovieCard extends StatelessWidget {
                     top: 0,
 
                     child: FavouriteButton(id: id, onFavouriteChanged:(bool) {},)),
-
               ],
-          ),
-        ),
-      ),
-    );
-  }
-
+            ),
+           ),
+         ),
+       );
+    }
 }

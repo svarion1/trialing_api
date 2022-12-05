@@ -131,22 +131,16 @@ class _DetailPageState extends State<DetailPage> {
                           child: Text(summary.body!.text, style: GoogleFonts.raleway(fontSize: 18, fontWeight: FontWeight.w300, color: Colors.white), textAlign: TextAlign.left,),
                         ),
                         const SizedBox(height: 10,),
-
                       ],
                     ),
                   ),
-
-
               );
-
             } else {
               return const Center(child: CircularProgressIndicator());
             }
           }
       );
-
     }
-
   }
 
 class RatingBar extends StatelessWidget {
@@ -154,12 +148,8 @@ class RatingBar extends StatelessWidget {
 
   RatingBar({Key? key, required this.rating}) : super(key: key);
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
     int ratingInt = rating.round();
 
     return Row(
@@ -172,9 +162,4 @@ class RatingBar extends StatelessWidget {
       }),
     );
   }
-
-
-
-
 }
-

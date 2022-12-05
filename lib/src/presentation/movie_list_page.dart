@@ -2,14 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:trialing_api/src/data/favourites/favourite_model.dart';
 import 'package:trialing_api/src/presentation/widgets/movie_card.dart';
 import "package:trialing_api/src/data/movie_model.dart" as Image;
 import '../data/movie_model.dart';
 import 'detail_page.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-
 
 class MovieListPage extends StatefulWidget {
   final String title;
@@ -21,8 +17,6 @@ class MovieListPage extends StatefulWidget {
 
 class _MovieListPageState extends State<MovieListPage> {
   late Future<List<MovieModel>> futureMovies;
-  bool _loading = true;
-
 
   @override
   void initState() {
@@ -33,7 +27,6 @@ class _MovieListPageState extends State<MovieListPage> {
 
   getMovies() async {
     futureMovies = fetchMovies();
-    _loading = false;
   }
 
   Future<List<MovieModel>> fetchMovies() async {
@@ -56,8 +49,7 @@ class _MovieListPageState extends State<MovieListPage> {
         elevation: 4,
         title: Center(child: Text(widget.title, style: GoogleFonts.raleway(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.redAccent, letterSpacing: 2) )),
         backgroundColor: Colors.black87,
-      ),
-
+            ),
       body: FutureBuilder<List<MovieModel>>(
               future: futureMovies,
               builder: (context, snapshot) {
@@ -93,7 +85,7 @@ class _MovieListPageState extends State<MovieListPage> {
                   }
                 return const Center(child: CircularProgressIndicator());
               },
-        ),
-    );
-  }
+            ),
+          );
+       }
 }

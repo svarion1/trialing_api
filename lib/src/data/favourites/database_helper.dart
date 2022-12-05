@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 import 'favourite_model.dart';
 
 Future<void> createTables(Database database) async {
@@ -14,7 +12,6 @@ Future<void> createTables(Database database) async {
 
 Future<Database> main() async {
     WidgetsFlutterBinding.ensureInitialized();
-
     final database = openDatabase(
       join(await getDatabasesPath(), "movies_database.db"),
       onCreate: (db, version) async{
@@ -27,7 +24,6 @@ Future<Database> main() async {
 
 Future<void> insertMovie(Favourite movie) async {
     final Database db = await main();
-
     await db.insert(
       'favourite_movies',
       movie.toMap(),
@@ -42,7 +38,7 @@ Future<List<Map<String, dynamic>>> getFavMovies() async {
 }
 
 Future<void> deleteMovie(int id) async {
-    final Database db = await main();
+   final Database db = await main();
 
    try { await db.delete(
      'favourite_movies',
