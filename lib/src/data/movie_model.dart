@@ -10,6 +10,7 @@ class MovieModel {
   String year;
   String summary;
   String rating;
+  String status;
 
   MovieModel(
       {required this.id,
@@ -19,7 +20,8 @@ class MovieModel {
         required this.url,
         required this.summary,
         required this.year,
-        required this.rating});
+        required this.rating,
+        required this.status});
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     var genres = json['genres'];
@@ -34,9 +36,13 @@ class MovieModel {
         rating: json['rating']['average'] != null
             ? json['rating']['average'].toString()
             : 'N/A',
+        status: json['status'],
         summary: parse(json['summary']).documentElement!.text);
 
+
   }
+
+
 }
 
 class Image {

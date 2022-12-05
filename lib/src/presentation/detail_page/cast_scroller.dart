@@ -20,7 +20,7 @@ class CastScroller extends StatelessWidget {
               ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Text(actor.person.name, style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.italic),),
+              child: Text(actor.person.name, style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.italic, color: Colors.white),),
             )
           ],
         ),
@@ -36,7 +36,7 @@ class CastScroller extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             "Cast",
-            style: GoogleFonts.raleway(fontSize: 20, fontWeight: FontWeight.w700),
+            style: GoogleFonts.raleway(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
           ),
         ),
         SizedBox.fromSize(
