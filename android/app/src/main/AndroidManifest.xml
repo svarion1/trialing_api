@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.trialing_api">
    <application
-        android:label="trialing_api"
+        android:label="OMEDIA"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

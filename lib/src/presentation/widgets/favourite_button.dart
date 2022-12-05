@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:trialing_api/src/data/favourites/database_helper.dart';
 import '../../data/favourites/favourite_model.dart';
 
 
@@ -22,63 +22,59 @@ class FavouriteButton extends StatefulWidget {
 
 class _FavouriteButtonState extends State<FavouriteButton> {
   bool _isFavourite = false;
+  int _isFav = 0;
+  List<Map<String,dynamic>> myFavourites = [];
 
-  Future<Database> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    final database = openDatabase(
-      join(await getDatabasesPath(), "movies_database.db"),
-      onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE movies(id INTEGER PRIMARY KEY, showId TEXT, isFavourite BOOLEAN)",
-        );
-      },
-      version: 1,
-    );
-    return database;
-  }
-
-  Future<void> insertMovie(Favourite movie) async {
-    final Database db = await main();
-
-    await db.insert(
-      'movies',
-      movie.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
-
-  Future<List<Favourite>> movies() async {
-    final Database db = await main();
-
-    final List<Map<String, dynamic>> maps = await db.query('movies');
-
-    return List.generate(maps.length, (i) {
-      return Favourite(
-        id: maps[i]['id'],
-        showId: maps[i]['showId'],
-        isFavourite: maps[i]['isFavourite'],
-      );
+  void _refreshFavourites() async {
+    myFavourites = await getFavMovies();
+    setState(() {
+      if(myFavourites.isNotEmpty){
+        for(int i = 0; i < myFavourites.length; i++){
+          if(myFavourites[i]["id"] == widget.id){
+            _isFav = 1;
+            _isFavourite = true;
+          }
+        }
+      }
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _refreshFavourites();
+  }
 
+  Future<void> addItem() async {
+    final Favourite movie = Favourite(
+      id: widget.id,
+      isFavourite: 1,
+    );
+    await insertMovie(movie);
+    _refreshFavourites();
+  }
+
+  Future<void> removeItem() async {
+    await deleteMovie(widget.id);
+    _refreshFavourites();
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    var fav = movies();
+
 
     return IconButton(
       icon: Icon(
-       _isFavourite ? Icons.favorite : Icons.favorite_border,
-        color: _isFavourite ? Colors.red : Colors.white,
+       _isFav==1 ? Icons.favorite : Icons.favorite_border,
+        color: _isFav==1 ? Colors.red : Colors.white,
       ),
       onPressed: () async {
-
+          addItem();
           setState(() {
             _isFavourite = !_isFavourite;
           });
-          await insertMovie(Favourite(id: widget.id, showId: widget.id, isFavourite: _isFavourite));
+          insertMovie(Favourite(id: widget.id, isFavourite: _isFavourite ? 1 : 0));
 
       },
 

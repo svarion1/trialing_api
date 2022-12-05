@@ -23,30 +23,6 @@ class _MovieListPageState extends State<MovieListPage> {
   late Future<List<MovieModel>> futureMovies;
   bool _loading = true;
 
-  Future<Database> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    final database = openDatabase(
-      join(await getDatabasesPath(), "movies_database.db"),
-      onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE movies(id INTEGER PRIMARY KEY, showId TEXT, isFavourite BOOLEAN)",
-        );
-      },
-      version: 1,
-    );
-    return database;
-  }
-
-  Future<void> insertMovie(Favourite movie) async {
-    final Database db = await main();
-
-    await db.insert(
-      'movies',
-      movie.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
-
 
   @override
   void initState() {
@@ -103,32 +79,21 @@ class _MovieListPageState extends State<MovieListPage> {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(id: snapshot.data![index].id)));
                               },
                             );
-                          }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          },
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             childAspectRatio: 0.8,
                                             crossAxisSpacing: 10,
                                             mainAxisSpacing: 10,
                                        ),
-                            ) ,
-
-
+                            ),
                       );
-
-
                 } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
                 return const Center(child: CircularProgressIndicator());
               },
-
-    ),
-
-
-
-
+        ),
     );
-
-
-
   }
 }
