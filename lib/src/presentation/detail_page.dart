@@ -5,7 +5,7 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:trialing_api/src/data/movie_model.dart';
 import "package:flutter/src/widgets/image.dart" as Image;
-import 'package:trialing_api/src/presentation/detail_page/cast_scroller.dart';
+import 'package:trialing_api/src/presentation/widgets/cast_scroller.dart';
 import '../data/cast_model.dart';
 
 class DetailPage extends StatefulWidget {

@@ -2,18 +2,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:trialing_api/src/data/favourites/favourite_model.dart';
 import 'package:trialing_api/src/presentation/widgets/movie_card.dart';
 import "package:trialing_api/src/data/movie_model.dart" as Image;
 import '../data/movie_model.dart';
 import 'detail_page.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 
 class MovieListPage extends StatefulWidget {
   final String title;
   const MovieListPage({Key? key, required this.title}) : super(key: key);
-
-
-
 
   @override
   State<MovieListPage> createState() => _MovieListPageState();
@@ -23,10 +23,36 @@ class _MovieListPageState extends State<MovieListPage> {
   late Future<List<MovieModel>> futureMovies;
   bool _loading = true;
 
+  Future<Database> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final database = openDatabase(
+      join(await getDatabasesPath(), "movies_database.db"),
+      onCreate: (db, version) {
+        return db.execute(
+          "CREATE TABLE movies(id INTEGER PRIMARY KEY, showId TEXT, isFavourite BOOLEAN)",
+        );
+      },
+      version: 1,
+    );
+    return database;
+  }
+
+  Future<void> insertMovie(Favourite movie) async {
+    final Database db = await main();
+
+    await db.insert(
+      'movies',
+      movie.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+
   @override
   void initState() {
     super.initState();
     getMovies();
+
   }
 
   getMovies() async {
@@ -45,9 +71,6 @@ class _MovieListPageState extends State<MovieListPage> {
       throw Exception('Failed to load show data');
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {

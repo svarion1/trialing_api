@@ -86,7 +86,7 @@ class MovieCard extends StatelessWidget {
                 Positioned(
                     top: 0,
 
-                    child: FavouriteButton(id: id, isFavourite: false, onFavouriteChanged: (bool ) {  },)),
+                    child: FavouriteButton(id: id, onFavouriteChanged:(bool) {},)),
 
               ],
           ),
